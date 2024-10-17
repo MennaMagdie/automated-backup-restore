@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if [ $# -ne 4 ]; then
+    echo "Incorrect command format.."
+    echo "$0 <source_directory> <backup_directory> <interval_seconds> <max_backups>"
+    exit 1
+fi
+
+dir=$1
+backupdir=$2
+interval_secs=$3
+max_backups=$4
+
+# ls -lR {$dir} > directory-info.last didn't work
+ls -lR "$dir" > directory-info.last
+
+mkdir "$backupdir" #should be put in MakeFile ta2reeban?
+
+current_date=$(date +"%Y-%m-%d-%H-%M-%S")
+cp -r "$dir" "$backupdir/$current_date"
+
+while true
+do
+    sleep "$interval_secs" # law 3ayzaha fel bg put &
+    ls -lR "$dir" > directory-info.new
+    if ! cmp -s directory-info.last directory-info.new; then
+        echo "MEHTAGEEN BACKUP ASAAAAP"
+        current_date=$(date +"%Y-%m-%d-%H-%M-%S")
+        cp -r "$dir" "$backupdir/$current_date"
+        ls -lR "$dir" > directory-info.last
+
+    else
+        echo "kolo zay elfol :))))"
+        rm directory-info.new #optmztn
+    fi
+
+    # law 3adad el directories fe backupdir > max_backups nemsa7 a2dam wahed
+    # dir_count=$(find "$backupdir" -mindepth 1 -type d | wc -l) ,mesh lazem
+    dir_count=$(ls "$backupdir" | wc -l)
+
+    if [ "$dir_count" -gt "$max_backups" ]; then
+        oldest=$(ls "$backupdir" | head -n 1) #since subdirectories will already be listed
+        rm -rf "$backupdir/$oldest"
+    fi
+done
+
