@@ -11,10 +11,10 @@ backupdir=$2
 interval_secs=$3
 max_backups=$4
 
-# ls -lR {$dir} > directory-info.last didn't work
+# ls -lR ${dir} > directory-info.last didn't work
 ls -lR "$dir" > directory-info.last
 
-mkdir "$backupdir" #should be put in MakeFile ta2reeban?
+# mkdir -p "$backupdir" #3ayzenha in MakeFile ta2reeban?
 
 current_date=$(date +"%Y-%m-%d-%H-%M-%S")
 cp -r "$dir" "$backupdir/$current_date"
@@ -43,4 +43,3 @@ do
         rm -rf "$backupdir/$oldest"
     fi
 done
-
