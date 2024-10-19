@@ -83,6 +83,13 @@ crontab -l
 ```
 
 -----------------------
+
+Required: 
+Running very 3rd Friday of the month at 12:31 am
+
+Expression => 31 0 * * 5#3
+
+-----------------------
 ### Sample Run
 
 1. Backup Script:
@@ -109,7 +116,7 @@ crontab -l
 
 - [Cron jobs in Linux](https://www.freecodecamp.org/news/cron-jobs-in-linux)
 - [Setting up cron jobs in Ubuntu](https://www.geeksforgeeks.org/how-to-setup-cron-jobs-in-ubuntu/)
-
+- [Scheduling cron jobs (Recommended)](https://www.uptimia.com/cron/every-3rd-friday)
 
 
 
