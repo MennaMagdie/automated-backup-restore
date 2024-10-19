@@ -24,12 +24,12 @@ do
     sleep "$interval_secs" # if bg, put & "generally"
     ls -lR "$dir" > directory-info.new
     if ! cmp -s directory-info.last directory-info.new; then
-        # echo "MEHTAGEEN BACKUP ASAAAAP"
+        echo "Backup Needed :)"
         current_date=$(date +"%Y-%m-%d-%H-%M-%S")
         cp -r "$dir" "$backupdir/$current_date"
         ls -lR "$dir" > directory-info.last
     else
-        # echo "kolo zay elfol :))))"
+        echo "Up to date :)"
         rm directory-info.new
     fi
 

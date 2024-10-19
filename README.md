@@ -37,26 +37,78 @@ INTERVAL=3 MAX_BACKUPS=4
 ```
 Note that they're 3 and 4 respectively by default
 
+----------------------
+
 
 ### Part 2: Restoring directory from a backup
 To activate the restore script:
 1. Make sure you're in the directory where the restore.sh file exists
-2. run:
+2. Run:
 ```bash
 make restore SRC_DIR=<source_dir> BACKUP_DIR=<backup_dir>
 ```
 Note that your backup directory should be the output of the previously mentioned backup script for this script to work, as it depends on comparing timestamps of versions.
 
-### Part 4: Cron Job
+To move between the n saved backups from your directory, you'll be asked to enter one of the following
+![alt text](images/image1.png)
 
+-------------------------------
 
+### Bonus | Part 4: Cron Job
 
+"Automating backing up your directory every minute."
+----------
+
+#### What is a cron job?
+A cron job in Ubuntu is a scheduled task that runs automatically at specified intervals. It’s managed by the cron daemon and defined in the crontab file.
+
+In this part, cron is used to schedule running the backup script in the background every minute.
+
+#### Setting up a cron job
+1. To modify the crontab run the following:
+```bash
+crontab -e
+```
+2. Add the following configuration to the crontab
+```bash
+*/1 * * * * /path/to/backup-cron.sh-script /src/directory /backup/directory /number/of/max-backups/
+```
+Make sure you enter the configuration correctly
+
+3. Ctrl+O to save the configuration, Ctrl+X the exit the crontab
+
+4. To verify that the cron job is working:
+```bash
+crontab -l
+```
+
+-----------------------
 ### Sample Run
+
+1. Backup Script:
+![alt text](images/image2.png)
+
+2. Restore Script:
+![alt text](images/image3.png)
+
+----------------------
+
 ### Resources:
+
+1. Bash Script
+
+- [Shell Script Commands](https://www.freecodecamp.org/news/bash-scripting-tutorial-linux-shell-script-and-command-line-for-beginners/)
+
+- [Bash Script Basics](https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/)
+
+2. Makefiles
+
+- [Makefiles : How to](https://www.gnu.org/software/make/manual/html_node/)
+
+3. Cron jobs
+
 - [Cron jobs in Linux](https://www.freecodecamp.org/news/cron-jobs-in-linux)
-- [Running cron command which has a forever loop](https://unix.stackexchange.com/questions/521497/how-should-i-run-a-cron-command-which-has-forever-loop)
-- [Bash Script basics](https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/)
-- [Makefiles](https://www.gnu.org/software/make/manual/html_node/)
+- [Setting up cron jobs in Ubuntu](https://www.geeksforgeeks.org/how-to-setup-cron-jobs-in-ubuntu/)
 
 
 
