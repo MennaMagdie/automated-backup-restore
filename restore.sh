@@ -9,7 +9,7 @@ fi
 dir=$1
 backupdir=$2
 
-current_backup=$(ls "$backupdir" | sort | tail -n 1)
+current_backup=$(ls "$backupdir" | tail -n 1)
 
 restore_backup() {
     backup_to_restore=$1
@@ -25,20 +25,17 @@ do
     read operation
 
     if [ "$operation" -eq 1 ]; then
-        backups=($(ls "$backupdir" | sort))
+        previous_backup=$(ls "$backupdir" | sort | grep -B 1 "$current_backup" | head -n 1)
 
-        current_index=$(printf "%s\n" "${backups[@]}" | grep -n "^$current_backup$" | cut -d: -f1)
-        current_index=$((current_index - 1))
-
-        if [ "$current_index" -eq 0 ]; then
+        if [ "$previous_backup" == "$current_backup" ] || [ -z "$previous_backup" ]; then
             echo "No older backup available to restore."
         else
-            previous_backup=${backups[$((current_index - 1))]}
             restore_backup "$previous_backup"
         fi
-        
+
     elif [ "$operation" -eq 2 ]; then
         next_backup=$(ls "$backupdir" | sort | grep -A 1 "$current_backup" | tail -n 1)
+        
         if [ "$next_backup" == "$current_backup" ]; then
             echo "No newer backup available to restore."
         else
