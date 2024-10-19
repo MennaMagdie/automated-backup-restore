@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# cd ~/Uni/OS/backup-restore-lab1 || exit 1
-
 sleep 22
 
 dir=$1

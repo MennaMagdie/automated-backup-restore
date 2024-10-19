@@ -9,6 +9,7 @@ directory: backup-restore-lab1
 - backupd.sh
 - restore.sh
 - Makefile
+- backup-cron.sh
 
 ## Prerequisites
 Ensure that you have make installed using:
