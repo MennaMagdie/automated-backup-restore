@@ -13,6 +13,7 @@ current_backup=$(ls "$backupdir" | sort | tail -n 1)
 
 restore_backup() {
     backup_to_restore=$1
+    rm -rf "$dir"/*
     cp -r "$backupdir/$backup_to_restore"/* "$dir/"
     echo "Restored to version: $backup_to_restore"
     current_backup=$backup_to_restore

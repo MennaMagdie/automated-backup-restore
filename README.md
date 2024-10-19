@@ -44,15 +44,18 @@ To activate the restore script:
 ```bash
 make restore SRC_DIR=<source_dir> BACKUP_DIR=<backup_dir>
 ```
-Note that your backup directory should be the output of the previously mentioned backup script for this script to work, as it depends on comparing timestamps of the versions.
+Note that your backup directory should be the output of the previously mentioned backup script for this script to work, as it depends on comparing timestamps of versions.
 
 ### Part 4: Cron Job
+
+
+
+### Sample Run
 ### Resources:
-
-
-
-
-
+- [Cron jobs in Linux](https://www.freecodecamp.org/news/cron-jobs-in-linux)
+- [Running cron command which has a forever loop](https://unix.stackexchange.com/questions/521497/how-should-i-run-a-cron-command-which-has-forever-loop)
+- [Bash Script basics](https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/)
+- [Makefiles](https://www.gnu.org/software/make/manual/html_node/)
 
 
 
